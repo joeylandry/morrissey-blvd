@@ -513,9 +513,9 @@ img {
   inset: -50%;
   z-index: 95;
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0.14;
   background-image: url("/tex/grain.png");
-  animation: grain 0.8s steps(5) infinite;
+  animation: grain 2.4s steps(5) infinite;
 }
 @keyframes grain {
   0% {
