@@ -1,15 +1,15 @@
 :root {
-  --ink: #17120e;
-  --ink-soft: #2a211a;
-  --paper: #f3e3c7;
-  --paper-hi: #fbf2df;
-  --paper-lo: #e6cfa6;
-  --orange: #e2471d;
-  --orange-deep: #b3310f;
-  --peach: #f6b98a;
-  --blue: #2f6db5;
-  --pink: #ff5d8f;
-  --muted: rgba(23, 18, 14, 0.6);
+  --ink: #0b1f3a;
+  --ink-soft: #16305a;
+  --paper: #e9eef6;
+  --paper-hi: #f6f9fd;
+  --paper-lo: #cfd9e8;
+  --orange: #2f6fed;
+  --orange-deep: #1d4fb8;
+  --peach: #9cbcf5;
+  --blue: #5b8def;
+  --pink: #7aa2f7;
+  --muted: rgba(11, 31, 58, 0.6);
 
   --f-hand: var(--f-marker), "Marker Felt", cursive;
   --f-big: var(--f-poster), Impact, sans-serif;
@@ -21,7 +21,7 @@
 
   /* fine paper grain + big soft blotches, tinted by the background colour */
   --tex-fine: url("/tex/paper.png");
-  --tex-blotch: url("/tex/blotch.png");
+  --tex-blotch: linear-gradient(transparent, transparent);
 }
 
 @media (min-width: 900px) {
@@ -74,29 +74,29 @@ img {
 
 /* ---------- surfaces ---------- */
 
-.paper {
-  background: var(--tex-fine), var(--tex-blotch), var(--paper);
-  color: var(--ink);
-  --title: var(--ink);
-  --title-shadow: var(--orange);
-  --note: var(--orange);
-}
-.orange-paper {
-  background: var(--tex-fine), var(--tex-blotch), var(--orange);
-  color: var(--ink);
-  --title: var(--paper);
-  --title-shadow: var(--ink);
-  --note: var(--ink);
-}
+.paper,
+.orange-paper,
 .ink {
   background:
-    radial-gradient(ellipse at 50% 40%, transparent 40%, rgba(0, 0, 0, 0.55)),
+    radial-gradient(ellipse at 50% 35%, rgba(47, 111, 237, 0.14), transparent 65%),
     var(--tex-fine),
-    var(--ink);
+    #0b1f3a;
   color: var(--paper);
   --title: var(--paper);
   --title-shadow: var(--orange);
   --note: var(--peach);
+}
+.orange-paper {
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(47, 111, 237, 0.14), transparent 65%),
+    var(--tex-fine),
+    #0e2547;
+}
+.ink {
+  background:
+    radial-gradient(ellipse at 50% 40%, transparent 40%, rgba(0, 0, 0, 0.45)),
+    var(--tex-fine),
+    #081730;
 }
 
 .boil {
@@ -263,14 +263,8 @@ img {
 .inner {
   position: relative;
   height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  overscroll-behavior: contain;
-  scrollbar-width: none;
+  overflow: hidden;
   padding: var(--top) var(--rail) 56px var(--gutter);
-}
-.inner::-webkit-scrollbar {
-  display: none;
 }
 
 /* ---------- chrome ---------- */
@@ -418,34 +412,22 @@ img {
 }
 .wipe-layer {
   position: absolute;
-  left: -4%;
-  width: 108%;
-  top: -7%;
-  height: 114%;
+  left: 0;
+  width: 100%;
+  top: 0;
+  height: 100%;
   visibility: hidden;
-  filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.45));
   will-change: transform;
 }
 .sheet {
   position: absolute;
   inset: 0;
 }
-.sheet-orange {
-  background: var(--tex-fine), var(--tex-blotch), var(--orange);
+.sheet-navy {
+  background: #0b1f3a;
 }
-.sheet-cream {
-  display: grid;
-  place-items: center;
-  background: var(--tex-fine), var(--tex-blotch), var(--paper);
-}
-.wipe-title {
-  font-family: var(--f-hand);
-  font-size: clamp(84px, 17vw, 270px);
-  line-height: 1;
-  color: var(--ink);
-  rotate: -5deg;
-  text-shadow: 0.04em 0.04em 0 var(--orange);
-  white-space: nowrap;
+.sheet-blue {
+  background: #14305c;
 }
 
 /* ---------- intro ---------- */
@@ -460,7 +442,7 @@ img {
 .intro-half {
   position: absolute;
   inset: -4%;
-  background: var(--tex-fine), #120e0b;
+  background: var(--tex-fine), #07142a;
 }
 .leader {
   position: relative;
@@ -736,14 +718,7 @@ img {
   height: auto;
 }
 .shows-list {
-  max-height: calc(100dvh - var(--top) - 40px);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: none;
   padding: 6px 18px 40px 8px;
-}
-.shows-list::-webkit-scrollbar {
-  display: none;
 }
 .shows-list ol {
   display: flex;
@@ -1662,8 +1637,6 @@ img {
     width: 70%;
   }
   .shows-list {
-    max-height: none;
-    overflow: visible;
     padding: 0;
   }
   .stub {
@@ -1746,4 +1719,18 @@ img {
   .sound-bars[data-on="true"] i {
     animation: none;
   }
+}
+
+/* light cards sitting on the navy pages keep dark text */
+.stub,
+.letter,
+.player-strip,
+.screen-wrap,
+.print,
+.tag,
+.art,
+.records > li .sleeve,
+.product-sheet,
+.bag {
+  color: var(--ink);
 }

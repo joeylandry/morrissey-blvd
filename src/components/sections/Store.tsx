@@ -23,7 +23,7 @@ export default function Store({ active, delay, products }: SectionProps & { prod
 
   return (
     <section ref={root} className="section store paper" data-active={active} aria-hidden={!active}>
-      <div className="inner" data-scroll>
+      <div className="inner">
         <div className="row-head">
           <Heading title="Store" note="the merch table" />
           <p className="store-note">secure checkout through Shopify</p>

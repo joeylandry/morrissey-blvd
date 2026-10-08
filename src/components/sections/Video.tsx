@@ -44,7 +44,7 @@ export default function Video({ active, delay }: SectionProps) {
 
   return (
     <section ref={root} className="section video ink" data-active={active} aria-hidden={!active}>
-      <div className="inner" data-scroll>
+      <div className="inner">
         <div className="row-head">
           <Heading title="Video" note="roll the tape" />
           <a className="scribble-link" href={socials[2].href} target="_blank" rel="noreferrer">

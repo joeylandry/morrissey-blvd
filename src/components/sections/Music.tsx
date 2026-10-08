@@ -27,7 +27,7 @@ export default function Music({ active, visited, delay }: SectionProps) {
 
   return (
     <section ref={root} className="section music orange-paper" data-active={active} aria-hidden={!active}>
-      <div className="inner" data-scroll>
+      <div className="inner">
         <div className="row-head">
           <Heading title="Music" note="put it on repeat" />
           <a className="scribble-link" href={socials[1].href} target="_blank" rel="noreferrer">
