@@ -1,14 +1,14 @@
 :root {
   --ink: #17120e;
   --ink-soft: #2a211a;
-  --paper: #f3e3c7;
-  --paper-hi: #fbf2df;
-  --paper-lo: #e6cfa6;
-  --orange: #e2471d;
-  --orange-deep: #b3310f;
-  --peach: #f6b98a;
-  --blue: #2f6db5;
-  --pink: #ff5d8f;
+  --paper: #efe4cf;
+  --paper-hi: #f8f0e0;
+  --paper-lo: #ddcdb0;
+  --orange: #d4572f;
+  --orange-deep: #a63e1c;
+  --peach: #eec3a2;
+  --blue: #3d6a94;
+  --pink: #d9667f;
   --muted: rgba(23, 18, 14, 0.6);
 
   --f-hand: var(--f-marker), "Marker Felt", cursive;
@@ -431,6 +431,8 @@ img {
   inset: 0;
 }
 .sheet-orange {
+  display: grid;
+  place-items: center;
   background: var(--tex-fine), var(--tex-blotch), var(--orange);
 }
 .sheet-cream {

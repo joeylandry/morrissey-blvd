@@ -17,9 +17,11 @@ import Store from "./sections/Store";
 import About from "./sections/About";
 
 const WHEEL_THRESHOLD = 30;
+const WHEEL_EDGE = 140; // extra push needed to leave a page that has its own scroll
+const SWIPE_EDGE = 120;
 const GESTURE_GAP = 200; // ms of wheel silence that starts a new gesture
 const SWIPE_MIN = 50;
-const ENTER_AFTER_WIPE = 0.3; // the tear starts ~0.3s after the swap
+const ENTER_AFTER_WIPE = 0.12;
 const ENTER_AFTER_INTRO = 1.45;
 
 // Can an inner scroller under `target` still move in `dir`?
@@ -30,6 +32,16 @@ function canScroll(target: EventTarget | null, dir: number) {
       const max = el.scrollHeight - el.clientHeight;
       if (max > 2) return dir > 0 ? el.scrollTop < max - 2 : el.scrollTop > 2;
     }
+    el = el.parentElement;
+  }
+  return false;
+}
+
+// Is there any inner scroller under `target` at all (at an edge or not)?
+function hasScroller(target: EventTarget | null) {
+  let el = target instanceof Element ? target : null;
+  while (el && el !== document.body) {
+    if (el instanceof HTMLElement && el.hasAttribute("data-scroll") && el.scrollHeight - el.clientHeight > 2) return true;
     el = el.parentElement;
   }
   return false;
@@ -122,7 +134,8 @@ export default function Site({ products }: { products: Product[] }) {
       }
       if (gap > GESTURE_GAP) acc = 0;
       acc += e.deltaY;
-      if (Math.abs(acc) >= WHEEL_THRESHOLD) {
+      // Pages with their own scrolling need a deliberate extra push at the edge.
+      if (Math.abs(acc) >= (hasScroller(e.target) ? WHEEL_EDGE : WHEEL_THRESHOLD)) {
         acc = 0;
         settle = true;
         goTo(activeRef.current + dir);
@@ -133,12 +146,14 @@ export default function Site({ products }: { products: Product[] }) {
     let sy = 0;
     let ignore = false;
     let room = { up: false, down: false };
+    let edge = false;
     const onTouchStart = (e: TouchEvent) => {
       const t = e.target instanceof Element ? e.target : document.body;
       ignore = overlayOpen() || !!t.closest("[data-noswipe]");
       sx = e.touches[0].clientX;
       sy = e.touches[0].clientY;
       room = { down: canScroll(t, 1), up: canScroll(t, -1) };
+      edge = hasScroller(t);
     };
     const onTouchMove = (e: TouchEvent) => {
       if (ignore || overlayOpen()) return;
@@ -149,7 +164,7 @@ export default function Site({ products }: { products: Product[] }) {
       if (ignore) return;
       const dy = sy - e.changedTouches[0].clientY;
       const dx = sx - e.changedTouches[0].clientX;
-      if (Math.abs(dy) < SWIPE_MIN || Math.abs(dx) > Math.abs(dy)) return;
+      if (Math.abs(dy) < (edge ? SWIPE_EDGE : SWIPE_MIN) || Math.abs(dx) > Math.abs(dy)) return;
       const dir = Math.sign(dy);
       if (dir > 0 ? room.down : room.up) return;
       goTo(activeRef.current + dir);
