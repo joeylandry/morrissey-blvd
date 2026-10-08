@@ -74,29 +74,29 @@ img {
 
 /* ---------- surfaces ---------- */
 
-.paper {
-  background: var(--tex-fine), var(--tex-blotch), var(--paper);
-  color: var(--ink);
-  --title: var(--ink);
-  --title-shadow: var(--orange);
-  --note: var(--orange);
-}
-.orange-paper {
-  background: var(--tex-fine), var(--tex-blotch), var(--orange);
-  color: var(--ink);
-  --title: var(--paper);
-  --title-shadow: var(--ink);
-  --note: var(--ink);
-}
+.paper,
+.orange-paper,
 .ink {
   background:
-    radial-gradient(ellipse at 50% 40%, transparent 40%, rgba(0, 0, 0, 0.55)),
+    radial-gradient(ellipse at 50% 35%, rgba(47, 111, 237, 0.14), transparent 65%),
     var(--tex-fine),
-    var(--ink);
+    #0b1f3a;
   color: var(--paper);
   --title: var(--paper);
   --title-shadow: var(--orange);
   --note: var(--peach);
+}
+.orange-paper {
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(47, 111, 237, 0.14), transparent 65%),
+    var(--tex-fine),
+    #0e2547;
+}
+.ink {
+  background:
+    radial-gradient(ellipse at 50% 40%, transparent 40%, rgba(0, 0, 0, 0.45)),
+    var(--tex-fine),
+    #081730;
 }
 
 .boil {
@@ -427,7 +427,7 @@ img {
   background: #0b1f3a;
 }
 .sheet-blue {
-  background: #2f6fed;
+  background: #14305c;
 }
 
 /* ---------- intro ---------- */
@@ -1719,4 +1719,18 @@ img {
   .sound-bars[data-on="true"] i {
     animation: none;
   }
+}
+
+/* light cards sitting on the navy pages keep dark text */
+.stub,
+.letter,
+.player-strip,
+.screen-wrap,
+.print,
+.tag,
+.art,
+.records > li .sleeve,
+.product-sheet,
+.bag {
+  color: var(--ink);
 }
