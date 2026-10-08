@@ -5,21 +5,19 @@ import gsap from "gsap";
 
 export type WipeHandle = {
   // Covers the screen, calls onCovered while hidden, then tears away.
-  play: (dir: 1 | -1, title: string, onCovered: () => void) => gsap.core.Timeline;
+  play: (dir: 1 | -1, onCovered: () => void) => gsap.core.Timeline;
 };
 
 // Two flat sheets, blue then navy, chase each other up (or down) the screen
-// like a page being pulled past. The navy one carries the section name.
+// like a page being pulled past.
 const Wipe = forwardRef<WipeHandle>(function Wipe(_, ref) {
   const blue = useRef<HTMLDivElement>(null);
   const navy = useRef<HTMLDivElement>(null);
 
   useImperativeHandle(ref, () => ({
-    play(dir, title, onCovered) {
+    play(dir, onCovered) {
       const b = blue.current!;
       const n = navy.current!;
-      const t = n.querySelector<HTMLElement>(".wipe-title")!;
-      t.textContent = title;
 
       return gsap
         .timeline()
@@ -36,9 +34,7 @@ const Wipe = forwardRef<WipeHandle>(function Wipe(_, ref) {
   return (
     <div className="wipe" aria-hidden>
       <div className="wipe-layer" ref={navy}>
-        <div className="sheet sheet-navy">
-          <span className="wipe-title" />
-        </div>
+        <div className="sheet sheet-navy" />
       </div>
       <div className="wipe-layer" ref={blue}>
         <div className="sheet sheet-blue" />

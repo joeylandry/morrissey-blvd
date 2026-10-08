@@ -78,7 +78,7 @@ export default function Site({ products }: { products: Product[] }) {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return land(next, 0);
       busy.current = true;
       wipe.current!
-        .play(next > from ? 1 : -1, sections[next].label, () => land(next, ENTER_AFTER_WIPE))
+        .play(next > from ? 1 : -1, () => land(next, ENTER_AFTER_WIPE))
         .eventCallback("onComplete", () => {
           busy.current = false;
         });

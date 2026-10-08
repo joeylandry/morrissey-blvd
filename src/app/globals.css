@@ -424,20 +424,10 @@ img {
   inset: 0;
 }
 .sheet-navy {
-  display: grid;
-  place-items: center;
   background: #0b1f3a;
 }
 .sheet-blue {
   background: #2f6fed;
-}
-.wipe-title {
-  font-family: var(--f-hand);
-  font-size: clamp(84px, 17vw, 270px);
-  line-height: 1;
-  color: #f4f7fb;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
 }
 
 /* ---------- intro ---------- */
