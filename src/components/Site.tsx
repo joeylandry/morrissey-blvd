@@ -103,6 +103,22 @@ export default function Site({ products }: { products: Product[] }) {
     return () => void tl.kill();
   }, [land]);
 
+  // Pages never scroll: shrink any page whose content is taller than the screen.
+  useEffect(() => {
+    const fit = () =>
+      document.querySelectorAll<HTMLElement>(".section .inner").forEach((el) => {
+        el.style.zoom = "1";
+        const over = el.scrollHeight / el.clientHeight;
+        if (over > 1.01) el.style.zoom = String(Math.max(0.5, 1 / over));
+      });
+    const t = window.setTimeout(fit, 100);
+    window.addEventListener("resize", fit);
+    return () => {
+      window.clearTimeout(t);
+      window.removeEventListener("resize", fit);
+    };
+  }, [active, products]);
+
   // Wheel, touch, keyboard and hash navigation.
   useEffect(() => {
     let acc = 0;

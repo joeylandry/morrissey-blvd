@@ -42,7 +42,7 @@ export default function Shows({ active, delay }: SectionProps) {
   const root = useRef<HTMLElement>(null);
   const today = useToday();
   const upcoming = today ? shows.filter((s) => s.date >= today) : shows;
-  const past = today ? shows.filter((s) => s.date < today).reverse() : [];
+  const past = today ? shows.filter((s) => s.date < today).reverse().slice(0, 3) : [];
 
   useEntrance(active, delay, root, (tl) => {
     tl.from(".pt-char", { yPercent: 110, rotate: () => gsapRand(-12, 12), duration: 0.6, stagger: 0.04, ease: "back.out(2)" }, 0)
@@ -56,7 +56,7 @@ export default function Shows({ active, delay }: SectionProps) {
 
   return (
     <section ref={root} className="section shows paper" data-active={active} aria-hidden={!active}>
-      <div className="inner shows-grid" data-scroll>
+      <div className="inner shows-grid">
         <div className="shows-side">
           <Heading title="Shows" note="fall '26 tour" />
           <figure className="pinned">
@@ -66,7 +66,7 @@ export default function Shows({ active, delay }: SectionProps) {
           </figure>
         </div>
 
-        <div className="shows-list" data-scroll>
+        <div className="shows-list">
           {upcoming.length ? (
             <ol>
               {upcoming.map((s, i) => (

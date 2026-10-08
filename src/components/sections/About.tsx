@@ -20,7 +20,7 @@ export default function About({ active, delay, goTo }: SectionProps) {
 
   return (
     <section ref={root} className="section about orange-paper" data-active={active} aria-hidden={!active}>
-      <div className="inner about-grid" data-scroll>
+      <div className="inner about-grid">
         <div>
           <Heading title="About" note="three brothers, one van" />
           <article className="letter">
