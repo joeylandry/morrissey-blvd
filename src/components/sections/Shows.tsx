@@ -42,7 +42,6 @@ export default function Shows({ active, delay }: SectionProps) {
   const root = useRef<HTMLElement>(null);
   const today = useToday();
   const upcoming = today ? shows.filter((s) => s.date >= today) : shows;
-  const past = today ? shows.filter((s) => s.date < today).reverse().slice(0, 3) : [];
 
   useEntrance(active, delay, root, (tl) => {
     tl.from(".pt-char", { yPercent: 110, rotate: () => gsapRand(-12, 12), duration: 0.6, stagger: 0.04, ease: "back.out(2)" }, 0)
@@ -50,8 +49,7 @@ export default function Shows({ active, delay }: SectionProps) {
       .from(".pinned", { y: -140, rotate: -18, autoAlpha: 0, duration: 0.9, ease: "back.out(1.4)" }, 0.1)
       .from(".pinned .tape", { scaleX: 0, duration: 0.3, stagger: 0.1 }, 0.75)
       .from(".stub:not([data-past=true])", { x: 160, rotate: 6, autoAlpha: 0, duration: 0.7, stagger: 0.09, ease: "power4.out" }, 0.2)
-      .from(".stub:not([data-past=true]) .stub-tix", { scale: 0, rotate: -30, duration: 0.4, stagger: 0.09, ease: "back.out(2.5)" }, 0.55)
-      .from(".shows-past", { autoAlpha: 0, y: 30, duration: 0.6 }, 0.8);
+      .from(".stub:not([data-past=true]) .stub-tix", { scale: 0, rotate: -30, duration: 0.4, stagger: 0.09, ease: "back.out(2.5)" }, 0.55);
   });
 
   return (
@@ -75,16 +73,6 @@ export default function Shows({ active, delay }: SectionProps) {
             </ol>
           ) : (
             <p className="empty">new dates soon</p>
-          )}
-          {past.length > 0 && (
-            <div className="shows-past">
-              <p className="scrawl-label">already played</p>
-              <ol>
-                {past.map((s, i) => (
-                  <Stub key={s.date} show={s} past i={i + 3} />
-                ))}
-              </ol>
-            </div>
           )}
         </div>
       </div>
