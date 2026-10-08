@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { shows, tourPoster, type Show } from "@/data/site";
 import { useEntrance } from "../useEntrance";
 import { dateParts, useToday } from "../dates";
@@ -41,7 +41,9 @@ function Stub({ show, past, i }: { show: Show; past: boolean; i: number }) {
 export default function Shows({ active, delay }: SectionProps) {
   const root = useRef<HTMLElement>(null);
   const today = useToday();
+  const [showPast, setShowPast] = useState(false);
   const upcoming = today ? shows.filter((s) => s.date >= today) : shows;
+  const past = today ? shows.filter((s) => s.date < today).reverse() : [];
 
   useEntrance(active, delay, root, (tl) => {
     tl.from(".pt-char", { yPercent: 110, rotate: () => gsapRand(-12, 12), duration: 0.6, stagger: 0.04, ease: "back.out(2)" }, 0)
@@ -73,6 +75,29 @@ export default function Shows({ active, delay }: SectionProps) {
             </ol>
           ) : (
             <p className="empty">new dates soon</p>
+          )}
+          {past.length > 0 && (
+            <div className="shows-past">
+              <button className="past-toggle" aria-expanded={showPast} onClick={() => setShowPast((v) => !v)}>
+                {showPast ? "hide" : "see"} past shows ({past.length})
+              </button>
+              {showPast && (
+                <ol className="past-strip" data-noswipe>
+                  {past.map((s) => {
+                    const d = dateParts(s.date);
+                    return (
+                      <li key={s.date} className="past-card">
+                        <span className="past-date">
+                          {d.month} {d.day}
+                        </span>
+                        <span className="past-city">{s.city}</span>
+                        {s.venue && <span className="past-venue">{s.venue}</span>}
+                      </li>
+                    );
+                  })}
+                </ol>
+              )}
+            </div>
           )}
         </div>
       </div>
