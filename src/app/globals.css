@@ -11,9 +11,9 @@
   --pink: #7aa2f7;
   --muted: rgba(11, 31, 58, 0.6);
 
-  --f-hand: var(--f-marker), "Marker Felt", cursive;
-  --f-big: var(--f-poster), Impact, sans-serif;
-  --f-body: var(--f-type), "Courier New", monospace;
+  --f-hand: var(--f-display), "Marker Felt", cursive;
+  --f-big: var(--f-display), Impact, sans-serif;
+  --f-body: var(--f-rounded), "Trebuchet MS", sans-serif;
 
   --gutter: clamp(16px, 5vw, 80px);
   --rail: clamp(16px, 5vw, 80px);
@@ -205,14 +205,14 @@ img {
   right: -0.4em;
   bottom: -0.6em;
   font-family: var(--f-hand);
-  font-size: clamp(20px, 2.2vw, 32px);
+  font-size: clamp(14px, 1.5vw, 22px);
   color: var(--note);
   rotate: -5deg;
   white-space: nowrap;
 }
 .scrawl-label {
   font-family: var(--f-hand);
-  font-size: 24px;
+  font-size: 18px;
   color: var(--note);
   rotate: -2deg;
   margin: 34px 0 12px;
@@ -302,6 +302,23 @@ img {
 .topbar[data-tone="orange"] .topbar-mark {
   color: var(--paper);
   text-shadow: 2px 2px 0 var(--ink);
+}
+.topbar-mark {
+  display: block;
+}
+.mark-img {
+  display: block;
+  height: 34px;
+  width: auto;
+}
+.mark-dark {
+  display: none;
+}
+.topbar[data-tone="light"] .mark-light {
+  display: none;
+}
+.topbar[data-tone="light"] .mark-dark {
+  display: block;
 }
 .topbar-mark[data-hidden="true"] {
   opacity: 0;
@@ -585,6 +602,12 @@ img {
 }
 .hero-word {
   display: inline-block;
+}
+.hero-logo {
+  display: block;
+  width: clamp(280px, 52vw, 760px);
+  height: auto;
+  filter: drop-shadow(0.03em 0.04em 0 var(--orange)) drop-shadow(0 4px 18px rgba(0, 0, 0, 0.45));
 }
 
 .sticker {
@@ -1615,8 +1638,8 @@ img {
   .dots a {
     padding: 6px 2px;
   }
-  .topbar-mark {
-    font-size: 20px;
+  .mark-img {
+    height: 28px;
   }
   .scrawl-note {
     right: -0.2em;

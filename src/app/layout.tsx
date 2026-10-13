@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Permanent_Marker, Special_Elite } from "next/font/google";
+import { Bagel_Fat_One, Fredoka } from "next/font/google";
 import "./globals.css";
 
-const marker = Permanent_Marker({ variable: "--f-marker", weight: "400", subsets: ["latin"] });
-const poster = Anton({ variable: "--f-poster", weight: "400", subsets: ["latin"] });
-const type = Special_Elite({ variable: "--f-type", weight: "400", subsets: ["latin"] });
+// Rounded, melty display face to sit next to the wavy logo, plus a soft
+// rounded sans for body copy.
+const display = Bagel_Fat_One({ variable: "--f-display", weight: "400", subsets: ["latin"] });
+const body = Fredoka({ variable: "--f-rounded", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.morrisseyblvd.org"),
@@ -23,7 +24,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${marker.variable} ${poster.variable} ${type.variable}`}>
+    <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body>{children}</body>
     </html>
   );

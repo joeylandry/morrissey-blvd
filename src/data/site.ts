@@ -103,6 +103,11 @@ export const shows: Show[] = [
     address: "Mansfield Drive-In",
     tickets: "https://mojobrand.us/mojoconnecticut",
   },
+  {
+    date: "2026-12-19",
+    city: "New York, NY",
+    venue: "First headline NYC show",
+  },
 ];
 
 export const releases = [
@@ -132,6 +137,16 @@ export const videos: { id: string; title: string; sub?: string }[] = [
 
 // Drop originals into public/photos and list them here.
 export const photos: { src: string; caption?: string; alt: string }[] = [
+  { src: "/photos/live-009.webp", alt: "The band performing under purple stage lights at the Comah" },
+  { src: "/photos/live-007.webp", alt: "Guitar solo in warm red stage light at The Drake" },
+  { src: "/photos/live-014.webp", alt: "A packed street crowd at the New Bedford 4th of July show" },
+  { src: "/photos/live-013.webp", alt: "Blue-lit concert at the Middle East in Cambridge" },
+  { src: "/photos/live-012.webp", alt: "Singer in daylight at Mile of Music" },
+  { src: "/photos/live-008.webp", alt: "The full band on stage at The Drake in Amherst" },
+  { src: "/photos/live-010.webp", alt: "Black and white festival crowd on Nantucket" },
+  { src: "/photos/live-011.webp", alt: "Band portrait for the Cypress release" },
+  { src: "/photos/poster-oktoberfest-2026.webp", caption: "Oktoberfest", alt: "New Bedford Oktoberfest 2026 poster" },
+  { src: "/photos/poster-nyc-dec-2026.webp", caption: "NYC 12/19", alt: "First headline NYC show poster, December 19" },
   { src: "/photos/van.jpg", alt: "The band loading the van at a campground" },
   { src: "/photos/hug-crowd.jpg", alt: "The band hugging on stage in front of the crowd" },
   { src: "/photos/bw-tent.jpg", alt: "Black and white shot of a packed tent singing along" },
