@@ -58,12 +58,10 @@ export default function Home({ active, delay, goTo }: SectionProps) {
 
       <div className="hero-copy">
         <p className="hero-tag">New Bedford, MA</p>
-        <h1 className="hero-mark boil">
+        <h1 className="hero-mark">
           <span className="hero-line">
-            <span className="hero-word">Morrissey</span>
-          </span>
-          <span className="hero-line">
-            <span className="hero-word">Blvd</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="hero-word hero-logo" src="/logos/logo-primary-white.svg" alt="Morrissey Blvd" />
           </span>
         </h1>
       </div>

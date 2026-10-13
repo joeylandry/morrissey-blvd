@@ -10,14 +10,17 @@ export default function Chrome({ active, goTo }: { active: number; goTo: (i: num
       <header className="topbar" data-tone={sections[active].tone}>
         <a
           href="#"
-          className="topbar-mark boil"
+          className="topbar-mark"
           data-hidden={active === 0}
           onClick={(e) => {
             e.preventDefault();
             goTo(0);
           }}
         >
-          Morrissey Blvd
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="mark-img mark-light" src="/logos/logo-wordmark-white.svg" alt="Morrissey Blvd" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="mark-img mark-dark" src="/logos/logo-wordmark-black.svg" alt="" aria-hidden />
         </a>
         <button className="bag-btn" onClick={() => setBagOpen(true)}>
           Bag <span className="bag-count">{count}</span>
